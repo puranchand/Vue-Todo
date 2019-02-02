@@ -1,20 +1,46 @@
 <template>
   <div class="hello">
-    <h1>{{ msg }}</h1>
-    <p>
-      Todo List Create by Puran
-    </p>
+    <h1>Todo List Created in Vue.js</h1>
+    <div>
+      <input v-model="message" placeholder="Edit Me"/>
+      <button type='button' v-on:click="addText()">Add Click</button>
+     <ul>
+       <li v-for="(todo,index) in todos" >
+        {{index +1}} {{todo}} 
+         <button type='button'  v-on:click="deleteText(todo)">x</button>
+       </li>
+     </ul>
+    </div>
   
   </div>
 </template>
 
 <script>
+
 export default {
-  name: 'HelloWorld',
-  doc: 'Puran',
-  props: {
-    msg: String
-  }
+  
+  name: 'Todo',
+
+  data() {
+    return {
+      todos:[],
+      message:'',
+    }
+  },
+
+  methods: {
+    addText() {
+      this.todos.push(this.message);
+      this.message = ''
+    },
+
+    deleteText(todo) {
+      const Index = this.todos.indexOf(todo);
+      this.todos.splice(Index, 1);
+    },
+    
+  },
+
 }
 </script>
 
@@ -28,7 +54,7 @@ ul {
   padding: 0;
 }
 li {
-  display: inline-block;
+  
   margin: 0 10px;
 }
 a {
